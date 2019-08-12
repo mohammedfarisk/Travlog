@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1032875280008",
+    "firebase_url": "https://travlogadmin.firebaseio.com",
+    "project_id": "travlogadmin",
+    "storage_bucket": "travlogadmin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032875280008:android:79e6e26f4604927d",
+        "android_client_info": {
+          "package_name": "com.example.travlog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032875280008-qpp91csqrnqlmga5sos3o0oaobmi7dee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travlog",
+            "certificate_hash": "966430f26967c00439d0a7a14519061a07b90be4"
+          }
+        },
+        {
+          "client_id": "1032875280008-lsr2l0rn7i4c0n9qe1bhfu5t4ftjkkqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKz84k9i6wn8fPgKawafib7WQukeIkapI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032875280008-lsr2l0rn7i4c0n9qe1bhfu5t4ftjkkqp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
