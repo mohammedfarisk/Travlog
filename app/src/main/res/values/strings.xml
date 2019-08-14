@@ -142,20 +142,20 @@
     
     
     <string-array name="countries_europe_array">
-        <item>Albania (Shqipëria)</item>
+        <item>Albania</item>
         <item>Andorra</item>
-        <item>Austria (Österreich)</item>
+        <item>Austria</item>
         <item>Belarus</item>
         <item>Belgium</item>
         <item>Bosnia and Herzegovina</item>
         <item>Bulgaria</item>
-        <item>Croatia (Hrvatska)</item>
-        <item>Czech Republic (Česko)</item>
-        <item>Denmark (Danmark)</item>
-        <item>Estonia (Eesti)</item>
-        <item>Finland (Suomi)</item>
+        <item>Croatia</item>
+        <item>Czech Republic)</item>
+        <item>Denmark</item>
+        <item>Estonia</item>
+        <item>Finland</item>
         <item>France</item>
-        <item>Germany (Deutschland)</item>
+        <item>Germany</item>
         <item>Greece</item>
         <item>Hungary</item>
         <item>Iceland</item>
@@ -189,7 +189,7 @@
         <item>Vatican City</item>
     </string-array>
 
-    <string-array name="countries_north_america_array">
+    <string-array name="countries_northamerica_array">
         <item>Antigua and Barbuda</item>
         <item>Anguilla</item>
         <item>Aruba</item>
@@ -237,7 +237,7 @@
         <item>US Virgin Islands</item>
     </string-array>
 
-    <string-array name="countries_south_america_array">
+    <string-array name="countries_southamerica_array">
         <item>Argentina</item>
         <item>Bolivia</item>
         <item>Brazil</item>
@@ -283,6 +283,66 @@
     </string-array>
 
 
+    <string-array name="states_india_array">
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chhattisgarh</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Ladak</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Odisha</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Telangana</item>
+        <item>Tripura</item>
+        <item>Uttar Pradesh</item>
+        <item>Uttarakhand</item>
+        <item>West Bengal</item>
+    </string-array>
+
+    <string-array name="states_algeria_array">
+        <item>Adrar</item>
+        <item>Chlef</item>
+        <item>Laghouat</item>
+        <item>Oum El Bouaghi</item>
+        <item>Batna</item>
+    </string-array>
+
+    <string-array name="states_afghanistan_array">
+        <item>Kabul</item>
+    </string-array>
+
+    <string-array name="states_albania_array">
+        <item>Tirana</item>
+    </string-array>
+
+    <string-array name="states_antiguaandbarbuda_array">
+        <item>Saint Johns</item>
+    </string-array>
+
+    <string-array name="states_argentina_array">
+        <item>Ciudad Autónoma de Buenos Aires</item>
+    </string-array>
+
+    <string-array name="states_australia_array">
+        <item>Sydney</item>
+    </string-array>
 
 
 </resources>
