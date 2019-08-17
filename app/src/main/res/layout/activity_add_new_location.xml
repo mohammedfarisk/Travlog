@@ -1,121 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="600dp"
-    android:fillViewport="false">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayoutAddNewLocation"
+    android:layout_height="match_parent">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutAddNewLocation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.toptoche.sample.MainActivity">
 
 
-        <EditText
-            android:id="@+id/editTextLocationName"
-            android:layout_width="252dp"
-            android:layout_height="47dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="8dp"
-            android:hint="@string/location_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.943"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:importantForAutofill="no"
-            android:inputType="" tools:targetApi="o" />
+            <EditText
+                android:id="@+id/editTextLocationName"
+                android:layout_width="252dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/location_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.943"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:importantForAutofill="no"
+                android:inputType="text" tools:targetApi="o"
+                app:layout_constraintVertical_bias="0.009" />
 
-        <Spinner
-            android:id="@+id/continentsSpinner"
-            android:layout_width="252dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.943"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextLocationName"
-            app:layout_constraintVertical_bias="0.027" />
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/continentsSpinner"
+                android:layout_width="252dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:entries="@array/continents_array"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.944"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextLocationName"
+                app:layout_constraintVertical_bias="0.009" />
 
-        <Spinner
-            android:id="@+id/countriesSpinner"
-            android:layout_width="252dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.943"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/continentsSpinner" />
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/countriesSpinner"
+                android:layout_width="252dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.943"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/continentsSpinner"
+                app:layout_constraintVertical_bias="0.009" />
 
-        <TextView
-            android:id="@+id/textViewLocationName"
-            android:layout_width="113dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="52dp"
-            android:text="@string/location_name"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/textViewLocationName"
+                android:layout_width="113dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="52dp"
+                android:text="@string/location_name"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center_vertical"/>
 
-        <TextView
-            android:id="@+id/textViewContinent"
-            android:layout_width="113dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="56dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center_vertical"
-            android:text="@string/continent"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/continentsSpinner"
-            app:layout_constraintHorizontal_bias="0.333"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLocationName" />
+            <TextView
+                android:id="@+id/textViewContinent"
+                android:layout_width="113dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:text="@string/continent"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/continentsSpinner"
+                app:layout_constraintHorizontal_bias="0.333"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLocationName" />
 
-        <TextView
-            android:id="@+id/textViewCountry"
-            android:layout_width="113dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="52dp"
-            android:gravity="center_vertical"
-            android:inputType="text"
-            android:text="@string/country"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewContinent" />
+            <TextView
+                android:id="@+id/textViewCountry"
+                android:layout_width="113dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="52dp"
+                android:gravity="center_vertical"
+                android:inputType="text"
+                android:text="@string/country"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewContinent" />
 
-        <TextView
-            android:id="@+id/textViewState"
-            android:layout_width="113dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="48dp"
-            android:gravity="center_vertical"
-            android:text="@string/state"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCountry" />
+            <TextView
+                android:id="@+id/textViewState"
+                android:layout_width="113dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/state"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewCountry" />
 
-        <Spinner
-            android:id="@+id/spinnerStates"
-            android:layout_width="252dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.111"
-            app:layout_constraintStart_toEndOf="@+id/textViewState"
-            app:layout_constraintTop_toBottomOf="@+id/countriesSpinner" />
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/spinnerStates"
+                android:layout_width="252dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.111"
+                app:layout_constraintStart_toEndOf="@+id/textViewState"
+                app:layout_constraintTop_toBottomOf="@+id/countriesSpinner"
+                app:layout_constraintVertical_bias="0.009" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/textViewNearestCities"
+                android:layout_width="113dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/nearest_cities"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewState"/>
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/spinnerNearestCities"
+                android:layout_width="252dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.111"
+                app:layout_constraintStart_toEndOf="@+id/textViewNearestCities"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerStates"
+                app:layout_constraintVertical_bias="0.009" />
+
+            <TextView
+                android:id="@+id/textViewDistanceFromBangalore"
+                android:layout_width="133dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/distance_from_bangalore"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNearestCities"/>
+
+            <EditText
+                android:id="@+id/editTextDistanceFromBangalore"
+                android:ems="10"
+                android:inputType="number"
+                android:layout_width="140dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.111"
+                app:layout_constraintStart_toEndOf="@+id/textViewDistanceFromBangalore"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerNearestCities"
+                android:importantForAutofill="no"/>
+
+            <TextView
+                android:id="@+id/textViewKMBangalore"
+                android:layout_width="63dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="145dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/km_bangalore"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/editTextDistanceFromBangalore"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerNearestCities"/>
+
+
+            <!--GHJ-->
+            <TextView
+                android:id="@+id/textViewDistanceFromHome"
+                android:layout_width="133dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/distance_from_home"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDistanceFromBangalore"/>
+
+            <EditText
+                android:id="@+id/editTextDistanceFromHome"
+                android:ems="10"
+                android:inputType="number"
+                android:layout_width="140dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.111"
+                app:layout_constraintStart_toEndOf="@+id/textViewDistanceFromHome"
+                app:layout_constraintTop_toBottomOf="@+id/editTextDistanceFromBangalore"
+                android:importantForAutofill="no"/>
+
+            <TextView
+                android:id="@+id/textViewKMHome"
+                android:layout_width="63dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="145dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/km_bangalore"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/editTextDistanceFromHome"
+                app:layout_constraintTop_toBottomOf="@+id/textViewKMBangalore"/>
+
+            <TextView
+                android:id="@+id/textViewGoogleMapLocation"
+                android:layout_width="133dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/google_map_location"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDistanceFromHome"/>
+
+
+            <EditText
+                android:id="@+id/editTextGoogleMapLocation"
+                android:layout_width="230dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/google_map_location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.142"
+                app:layout_constraintStart_toEndOf="@+id/textViewGoogleMapLocation"
+                app:layout_constraintTop_toBottomOf="@+id/editTextDistanceFromHome"
+                android:importantForAutofill="no"
+                android:inputType="text" tools:targetApi="o"
+                app:layout_constraintVertical_bias="0.009"/>
+
+            <TextView
+                android:id="@+id/textViewNearestTouristSpots"
+                android:layout_width="133dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/nearest_tourist_spots"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewGoogleMapLocation"/>
+
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/NearestTouristSpotsSpinner"
+                android:layout_width="230dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/textViewNearestTouristSpots"
+                app:layout_constraintTop_toBottomOf="@+id/editTextGoogleMapLocation"
+                app:layout_constraintVertical_bias="0.009" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>

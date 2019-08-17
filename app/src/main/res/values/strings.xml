@@ -15,6 +15,11 @@
     <string name="area">Area</string>
     <string name="nearest_cities">Nearest Cities</string>
     <string name="distance_from_bangalore">Distance From Bangalore</string>
+    <string name="distance_from_home">Distance From Home</string>
+    <string name="km_bangalore">KM</string>
+    <string name="km_home">KM</string>
+    <string name="google_map_location">Google Map Location</string>
+    <string name="nearest_tourist_spots">Nearest Tourist Spots</string>
 
 
     <string-array name="continents_array">

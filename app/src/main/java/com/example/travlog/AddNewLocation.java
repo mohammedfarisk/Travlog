@@ -1,22 +1,24 @@
 package com.example.travlog;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.AdapterView;
-
 import java.lang.String;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 public class AddNewLocation extends AppCompatActivity{
 
+    DatabaseHelper travlogDB;
+
     Spinner continentSpinner, countrySpinner, statesSpinner;
+
+    List<String> db_table_result_rows_list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +26,26 @@ public class AddNewLocation extends AppCompatActivity{
 
         setContentView(R.layout.activity_add_new_location);
 
+        travlogDB = new DatabaseHelper(this);
+
+
         //continents spinner
         continentSpinner = (Spinner) findViewById(R.id.continentsSpinner);
         countrySpinner = (Spinner) findViewById(R.id.countriesSpinner);
         statesSpinner = (Spinner) findViewById(R.id.spinnerStates);
+
+
+//        String continentArray = "countries_southamerica_array";
+//        int countriesArrayID= getResources().getIdentifier(continentArray , "array",AddNewLocation.this.getPackageName());
+//        String[] continents = getResources().getStringArray(countriesArrayID);
+//
+//        travlogDB.createTable();
+
+//        for(int i=0; i<15; i++)
+//        {
+//            travlogDB.insertDataCountries(continents[i]);
+//        }
+
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.continents_array, android.R.layout.simple_spinner_item);
@@ -63,17 +81,37 @@ public class AddNewLocation extends AppCompatActivity{
 
                         String country = countrySpinner.getSelectedItem().toString();
 
-                        country = country.replaceAll("\\s+", "");
-                        country = country.toLowerCase();
-                        String stateName = "states_"+country+"_array";
+                        String table_name = "states";
+                        String column_to_fetch = "state";
+                        String column_to_serach = "country";
+                        String[] value_to_search = {country};
 
-                        int statesArrayID= getResources().getIdentifier(stateName , "array",AddNewLocation.this.getPackageName());
-                        String[] items = getResources().getStringArray(statesArrayID);
-                        System.out.println("STATE = "+items[0]);
+                        db_table_result_rows_list = travlogDB.getAllQueriedRows(column_to_fetch, table_name, column_to_serach, value_to_search);
 
-                        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(AddNewLocation.this.getApplicationContext(),   android.R.layout.simple_spinner_item, items);
+
+//                        country = country.replaceAll("\\s+", "");
+//                        country = country.toLowerCase();
+//                        String stateName = "states_"+country+"_array";
+//
+//                        int statesArrayID= getResources().getIdentifier(stateName , "array",AddNewLocation.this.getPackageName());
+//                        String[] items = getResources().getStringArray(statesArrayID);
+//                        System.out.println("STATE = "+items[0]);
+
+                        db_table_result_rows_list.add("Add State +");
+
+                        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(AddNewLocation.this.getApplicationContext(),   android.R.layout.simple_spinner_item, db_table_result_rows_list);
                         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-                        statesSpinner.setAdapter(spinnerArrayAdapter);
+
+                        if(statesSpinner.getSelectedItem().toString() == "Add State +")
+                        {
+                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+                            alertDialog.setTitle("NEW STATE");
+                            alertDialog.setMessage("Enter Name of State");
+                        }
+                        else
+                        {
+                            statesSpinner.setAdapter(spinnerArrayAdapter);
+                        }
                     }
 
                     @Override
@@ -88,10 +126,6 @@ public class AddNewLocation extends AppCompatActivity{
 
             }
         });
-
-
-
-        //countries spinner
 
     }
 }
