@@ -26,6 +26,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_STATES_STATE = "state";
     public static final String COL_STATES_STATE_CODE = "state_code";
 
+    public static final String TABLE_DISTRICTS = "districts";
+    public static final String COL_DISTRICTS_DISTRICTS_ID = "districts_id";
+    public static final String COL_DISTRICTS_DISTRICT = "district";
+    public static final String COL_DISTRICTS_DISTRICT_CODE = "district_code";
+
+    public static final String TABLE_LOCATIONS = "locations";
+    public static final String COL_LOCATIONS_LOCATIONS_ID = "locations_id";
+    public static final String COL_LOCATIONS_LOCATION_NAME = "location_name";
+
+    public static final String TABLE_NEAREST_CITIES = "nearest_cities";
+    public static final String COL_NEAREST_CITIES_NEAREST_CITIES_ID = "nearest_cities_id";
+    public static final String COL_NEAREST_CITIES_CITY_NAME = "city_name";
+    public static final String COL_NEAREST_CITIES_DISTANCE_TO_LOCATION = "distance_to_location";
+
+    public static final String TABLE_NEAREST_TOURIST_SPOTS = "nearest_tourist_spots";
+    public static final String COL_NEAREST_TOURIST_SPOTS_NEAREST_TOURIST_SPOTS_ID = "nearest_tourist_spots_id";
+    public static final String COL_NEAREST_TOURIST_SPOTS_NEAREST_TOURIST_SPOT = "nearest_tourist_spot";
+
+
+
+
 
     public DatabaseHelper(Context context) {
         //this function is a constructor and it creates a database with name "travlog"
@@ -159,6 +180,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        sqLiteDatabase.execSQL("create table "+ TABLE_CONTINENTS +" (continents_id INTEGER PRIMARY KEY AUTOINCREMENT,  continent TEXT)");
 //        sqLiteDatabase.execSQL("create table "+ TABLE_COUNTRIES +" (countries_id INTEGER PRIMARY KEY AUTOINCREMENT,  country TEXT, country_code TEXT, continent TEXT, continents_id INTEGER, tele_extension TEXT)");
 //        sqLiteDatabase.execSQL("create table "+ TABLE_STATES +" (states_id INTEGER PRIMARY KEY AUTOINCREMENT,  state TEXT, state_code TEXT, country TEXT, countries_id INTEGER, continent TEXT, continents_id INTEGER)");
+//        sqLiteDatabase.execSQL("create table "+ TABLE_DISTRICTS +" (districts_id INTEGER PRIMARY KEY AUTOINCREMENT,  district TEXT, district_code TEXT, state TEXT, states_id INTEGER, country TEXT, countries_id INTEGER, continent TEXT, continents_id INTEGER)");
+//        sqLiteDatabase.execSQL("create table "+ TABLE_LOCATIONS +" (locations_id INTEGER PRIMARY KEY AUTOINCREMENT,  location_name TEXT, district TEXT, districts_id INTEGER, state TEXT, states_id INTEGER, country TEXT, countries_id INTEGER, continent TEXT, continents_id INTEGER)");
+//        sqLiteDatabase.execSQL("create table "+ TABLE_NEAREST_CITIES +" (nearest_cities_id INTEGER PRIMARY KEY AUTOINCREMENT, city_name TEXT, location_name TEXT)");
+        sqLiteDatabase.execSQL("create table "+ TABLE_NEAREST_TOURIST_SPOTS +" (nearest_tourist_spots_id INTEGER PRIMARY KEY AUTOINCREMENT, nearest_tourist_spot TEXT, location_name TEXT)");
     }
 
     public void deleteTable(String table_name)
