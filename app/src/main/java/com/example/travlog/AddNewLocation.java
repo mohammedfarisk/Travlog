@@ -1,6 +1,8 @@
 package com.example.travlog;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,8 +29,10 @@ public class AddNewLocation extends AppCompatActivity{
 
 
     String state, table_name, column_to_fetch, column_to_serach, district, country, continent, location_name, nearest_city, google_map_location, nearest_tourist_spot;
-    Integer distance_from_bangalore, distance_from_home;
-    String[] value_to_search;
+    Integer distance_from_bangalore, distance_from_home, continents_id, countries_id, states_id, districts_id;
+    String[] value_to_search, columns_to_fetch, values_to_search, continentArray, countriesArray;
+    Boolean result, result_districts, result_locations, result_nearest_cities, result_nearest_tourist_spots;
+    Cursor dataFromTable;
 
     List<String> db_table_result_rows_list = new ArrayList<>();
 
@@ -69,20 +73,34 @@ public class AddNewLocation extends AppCompatActivity{
         editTextGoogleMapLocation = (EditText) findViewById(R.id.editTextGoogleMapLocation);
 
 
-        //        String continentArray = "countries_southamerica_array";
-//        int countriesArrayID= getResources().getIdentifier(continentArray , "array",AddNewLocation.this.getPackageName());
-//        String[] continents = getResources().getStringArray(countriesArrayID);
-//
-//        travlogDB.createTable();
+        //        travlogDB.deleteTable("locations");
+        travlogDB.createTable();
 
-//        for(int i=0; i<15; i++)
-//        {
-//            travlogDB.insertDataCountries(continents[i]);
-//        }
 
+
+        //inserting data in to continents table
+        continentArray = new String[]{"Africa", "Asia", "Europe", "North America", "Australia", "South America"};
+        for(int i = 0; i<6; i++)
+        {
+            travlogDB.insertDataContinents(continentArray[i]);
+        }
+
+        countriesArray = new String[]{"countries_africa_array", "countries_asia_array", "countries_europe_array", "countries_southamerica_array", "countries_australia_array"};
+
+        for(int i = 0; i < 5; i++)
+        {
+            int countriesArrayID= getResources().getIdentifier(countriesArray[i] , "array",AddNewLocation.this.getPackageName());
+            String[] countries = getResources().getStringArray(countriesArrayID);
+
+
+            for(i=0; i<15; i++)
+            {
+                travlogDB.insertDataCountries(countries[i]);
+            }
+        }
 
         location_name = editTextLocationName.getText().toString();
-        System.out.println("LOCATION NAME="+location_name);
+//        System.out.println("LOCATION NAME="+location_name);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.continents_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -116,6 +134,7 @@ public class AddNewLocation extends AppCompatActivity{
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                         country = countrySpinner.getSelectedItem().toString();
+                        System.out.println("selected country = "+country);
 
                         statesSpinner.setOnTouchListener(new AdapterView.OnTouchListener(){
 
@@ -138,7 +157,7 @@ public class AddNewLocation extends AppCompatActivity{
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         state = statesSpinner.getSelectedItem().toString();
-                                        System.out.println("selected state = "+state);
+//                                        System.out.println("selected state = "+state);
                                         if(state == "Add State +")
                                         {
                                             //showing pop up alert dialog box to add new item
@@ -160,6 +179,7 @@ public class AddNewLocation extends AppCompatActivity{
                                                         public void onClick(DialogInterface dialogInterface, int i) {
                                                             // this block will execute when we click on "Yes"
                                                             state =  input_add_new_state.getText().toString();
+                                                            System.out.println("hehe="+state);
                                                             db_table_result_rows_list.remove(0);
                                                             db_table_result_rows_list.add(state);
 
@@ -169,11 +189,10 @@ public class AddNewLocation extends AppCompatActivity{
 
                                                             statesSpinner.setSelection(((ArrayAdapter<String>)statesSpinner.getAdapter()).getPosition(state));
 
-
-
                                                             //district spinner flow starts here
                                                             if(state != "")
                                                             {
+                                                                System.out.println("entered to district spinner flow");
                                                                 districtsSpinner.setOnTouchListener(new AdapterView.OnTouchListener() {
                                                                     @Override
                                                                     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -194,7 +213,7 @@ public class AddNewLocation extends AppCompatActivity{
                                                                             @Override
                                                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                                                                 district = districtsSpinner.getSelectedItem().toString();
-                                                                                System.out.println("selected district = "+district);
+//                                                                                System.out.println("selected district = "+district);
                                                                                 if(district == "Add District +")
                                                                                 {
                                                                                     //showing pop up alert dialog box to add new item
@@ -254,7 +273,6 @@ public class AddNewLocation extends AppCompatActivity{
 
                                                             //district spinnner flow ends here
 
-
                                                         }
                                                     }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                                 @Override
@@ -270,6 +288,93 @@ public class AddNewLocation extends AppCompatActivity{
                                             alertDialog.show();
                                         }
 
+                                        else
+                                        {
+                                            //district spinner flow starts here
+                                            if(state != "")
+                                            {
+                                                System.out.println("entered to district spinner flow");
+                                                districtsSpinner.setOnTouchListener(new AdapterView.OnTouchListener() {
+                                                    @Override
+                                                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                                                        table_name = "districts";
+                                                        column_to_fetch = "district";
+                                                        column_to_serach = "state";
+                                                        value_to_search = new String[]{state};
+
+                                                        db_table_result_rows_list = travlogDB.getAllQueriedRows(column_to_fetch, table_name, column_to_serach, value_to_search);
+
+                                                        db_table_result_rows_list.add("Add District +");
+
+                                                        ArrayAdapter<String> spinnerArrayAdapterDistrict = new ArrayAdapter<String>(AddNewLocation.this.getApplicationContext(),   android.R.layout.simple_spinner_item, db_table_result_rows_list);
+                                                        spinnerArrayAdapterDistrict.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+                                                        districtsSpinner.setAdapter(spinnerArrayAdapterDistrict);
+
+                                                        districtsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                                            @Override
+                                                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                                                district = districtsSpinner.getSelectedItem().toString();
+//                                                                                System.out.println("selected district = "+district);
+                                                                if(district == "Add District +")
+                                                                {
+                                                                    //showing pop up alert dialog box to add new item
+                                                                    AlertDialog.Builder builder = new AlertDialog.Builder(AddNewLocation.this);
+                                                                    builder.setTitle("Add New District");
+                                                                    builder.setMessage("Enter District Name");
+
+                                                                    final EditText input_add_new_district = new EditText(AddNewLocation.this);
+                                                                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                                                                            LinearLayout.LayoutParams.MATCH_PARENT,
+                                                                            LinearLayout.LayoutParams.MATCH_PARENT);
+                                                                    input_add_new_district.setLayoutParams(lp);
+                                                                    builder.setView(input_add_new_district);
+
+                                                                    builder.setCancelable(true)
+                                                                            .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                                                                                @Override
+                                                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                                                    // this block will execute when we click on "Yes"
+                                                                                    district =  input_add_new_district.getText().toString();
+
+                                                                                    db_table_result_rows_list.remove(0);
+                                                                                    db_table_result_rows_list.add(district);
+
+                                                                                    ArrayAdapter<String> spinnerArrayAdapterDistrict = new ArrayAdapter<String>(AddNewLocation.this.getApplicationContext(),   android.R.layout.simple_spinner_item, db_table_result_rows_list);
+                                                                                    spinnerArrayAdapterDistrict.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+                                                                                    districtsSpinner.setAdapter(spinnerArrayAdapterDistrict);
+
+                                                                                    districtsSpinner.setSelection(((ArrayAdapter<String>)districtsSpinner.getAdapter()).getPosition(district));
+
+                                                                                }
+                                                                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                                                        @Override
+                                                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                                                            // this block will execute when we click on "Cancel"
+                                                                            district = "";
+                                                                            dialogInterface.cancel();
+                                                                        }
+                                                                    });
+
+                                                                    AlertDialog alertDialog = builder.create();
+                                                                    alertDialog.setTitle("Add New District");
+                                                                    alertDialog.show();
+                                                                }
+
+                                                            }
+
+                                                            @Override
+                                                            public void onNothingSelected(AdapterView<?> adapterView) {
+                                                                district = "";
+                                                            }
+                                                        });
+                                                        return false;
+                                                    }
+                                                });
+                                            }
+
+                                            //district spinnner flow ends here
+                                        }
+
                                     }
 
                                     @Override
@@ -278,6 +383,8 @@ public class AddNewLocation extends AppCompatActivity{
                                     }
 
                                 });
+
+                                System.out.println("stateeee="+state);
                                 return false;
                             }
                         });
@@ -295,6 +402,9 @@ public class AddNewLocation extends AppCompatActivity{
 
             }
         });
+
+
+
 
         //here
         if(location_name != "")
@@ -319,7 +429,7 @@ public class AddNewLocation extends AppCompatActivity{
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             nearest_city = spinnerNearestCities.getSelectedItem().toString();
-                            System.out.println("selected nearest city = "+nearest_city);
+//                            System.out.println("selected nearest city = "+nearest_city);
                             if(nearest_city == "Add Nearest City +")
                             {
                                 //showing pop up alert dialog box to add new item
@@ -419,7 +529,7 @@ public class AddNewLocation extends AppCompatActivity{
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             nearest_tourist_spot = spinnerNearestTouristsSpot.getSelectedItem().toString();
-                            System.out.println("selected nearest tourist spot = "+nearest_city);
+//                            System.out.println("selected nearest tourist spot = "+nearest_city);
                             if(nearest_tourist_spot == "Add Nearest Tourists Spot +")
                             {
                                 //showing pop up alert dialog box to add new item
@@ -460,7 +570,7 @@ public class AddNewLocation extends AppCompatActivity{
                                 });
 
                                 AlertDialog alertDialog = builder.create();
-                                alertDialog.setTitle("Add New Nearest City");
+                                alertDialog.setTitle("Add New Nearest Tourist Spot");
                                 alertDialog.show();
                             }
 
@@ -520,5 +630,82 @@ public class AddNewLocation extends AppCompatActivity{
         System.out.println("Distance from Home = "+distance_from_home);
         System.out.println("Google Map Location = "+google_map_location);
         System.out.println("Nearest Tourist Spot = "+nearest_tourist_spot);
+
+        if(continent == "Africa"){continents_id = 1;}
+        else if(continent == "Asia"){continents_id = 2;}
+        else if(continent == "Europe"){continents_id = 3;}
+        else if(continent == "North America"){continents_id = 4;}
+        else if(continent == "Australia"){continents_id = 5;}
+        else if(continent == "South America"){continents_id = 6;}
+
+        //taking countries id
+        values_to_search = new String[]{country};
+        columns_to_fetch = new String[]{"countries_id"};
+        dataFromTable =  travlogDB.getDataFromTable("countries", columns_to_fetch, "country", values_to_search);
+
+        if( dataFromTable != null && dataFromTable.moveToFirst() )
+        {
+            countries_id = Integer.parseInt(dataFromTable.getString(dataFromTable.getColumnIndex("countries_id")));
+//            dataFromTable.close();
+        }
+        else
+        {
+            countries_id = 0;
+        }
+
+        // inserting data in to states table
+        result = travlogDB.insertDataStates(state, country, countries_id, continent, continents_id);
+
+        if(result)
+        {
+            //getting states_id from states table
+            values_to_search = new String[]{state};
+            columns_to_fetch = new String[]{"states_id"};
+            dataFromTable =  travlogDB.getDataFromTable("states", columns_to_fetch, "state", values_to_search);
+
+            if( dataFromTable != null && dataFromTable.moveToFirst() )
+            {
+                states_id = Integer.parseInt(dataFromTable.getString(dataFromTable.getColumnIndex("states_id")));
+//                dataFromTable.close();
+            }
+            else
+            {
+                states_id = 0;
+            }
+        }
+
+        //inserting data in to districts table
+        result_districts = travlogDB.insertDataDistricts(district, state, states_id, country, countries_id, continent, continents_id);
+        if(result_districts)
+        {
+            //getting districts_id from districts table
+            values_to_search = new String[]{district};
+            columns_to_fetch = new String[]{"districts_id"};
+            dataFromTable =  travlogDB.getDataFromTable("districts", columns_to_fetch, "district", values_to_search);
+
+            if( dataFromTable != null && dataFromTable.moveToFirst() )
+            {
+                String abc = dataFromTable.getString(dataFromTable.getColumnIndex("states_id"));
+                System.out.println("stes iddd");
+                System.out.println(abc);
+//                dataFromTable.close();
+            }
+            else
+            {
+                districts_id = 0;
+            }
+        }
+
+        //inserting data in to locations table
+        result_locations = travlogDB.insertDataLocations(location_name, district, districts_id, state, states_id, country, countries_id, continent, continents_id, distance_from_bangalore, distance_from_home, google_map_location);
+
+        //inserting data in to nearest cities table
+        result_nearest_cities = travlogDB.insertDataNearestCities(nearest_city, location_name);
+
+        //inserting data in to nearest tourist spots table
+        result_nearest_tourist_spots = travlogDB.insertDataNearestTouristSpots(nearest_tourist_spot, location_name);
+
+
+
     }
 }
