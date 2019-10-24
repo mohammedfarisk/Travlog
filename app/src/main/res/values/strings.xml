@@ -20,6 +20,11 @@
     <string name="km_home">KM</string>
     <string name="google_map_location">Google Map Location</string>
     <string name="nearest_tourist_spots">Nearest Tourist Spots</string>
+    <string name="textviewDetails">Details Of Location</string>
+    <string name="todo">TODO</string>
+    <string name="hintAddDetails">Type Details</string>
+    <string name="locationDetails">Location Details</string>
+    <string name="btn_submit_location_details">SUBMIT DETAILS</string>
 
 
     <string-array name="continents_array">

@@ -47,6 +47,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_NEAREST_TOURIST_SPOTS_NEAREST_TOURIST_SPOTS_ID = "nearest_tourist_spots_id";
     public static final String COL_NEAREST_TOURIST_SPOTS_NEAREST_TOURIST_SPOT = "nearest_tourist_spot";
 
+    public static final String TABLE_LOCATION_DETAILS = "location_details";
+    public static final String COL_LOCATION_DETAILS_LOCATION_DETAILS_ID = "location_details_id";
+    public static final String COL_LOCATION_DETAILS_LOCATION_DETAILS = "location_details";
+
 
 
 
@@ -499,6 +503,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(!exists_nearest_tourist_spots)
         {
             sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLE_NEAREST_TOURIST_SPOTS +" (nearest_tourist_spots_id INTEGER PRIMARY KEY AUTOINCREMENT, nearest_tourist_spot TEXT, location_name TEXT)");
+        }
+
+        boolean exists_location_details = this.isTableExists(TABLE_LOCATION_DETAILS);
+        if(!exists_nearest_tourist_spots)
+        {
+            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLE_LOCATION_DETAILS +" (location_details_id INTEGER PRIMARY KEY AUTOINCREMENT, location_name TEXT, locations_id INTEGER)");
         }
 
     }
